@@ -59,4 +59,17 @@ public class Room
     public Room getExit(String direction) {
         return exits.get(direction);
     }
+
+    /**
+     * Retorna uma string com todas as saídas possíveis da sala.
+     */
+    public String getExitString() {
+        String exitString = "Exits: ";
+        Set<String> keys = exits.keySet();
+        for(String exit : keys) {
+            exitString += " " + exit;
+        }
+        
+        return exitString;
+    }
 }
