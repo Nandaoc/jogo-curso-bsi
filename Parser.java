@@ -62,4 +62,11 @@ public class Parser
             return new Command(null, word2); 
         }
     }
+
+    /**
+     * Imprime todos os comandos válidos da classe CommandWords.   
+    */
+    public String showCommands() {
+        return commands.showAll();
+    }
 }

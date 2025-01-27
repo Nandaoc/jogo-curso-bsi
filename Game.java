@@ -112,6 +112,9 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
+        else if (commandWord.equals("look")) {
+            look();
+        }
 
         return wantToQuit;
     }
@@ -129,7 +132,7 @@ public class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        System.out.println(parser.showCommands());
     }
 
     /** 
@@ -188,9 +191,16 @@ public class Game
     }
     
     /**
-       * Método que imprime a localização atual do jogador.
+     * Método que imprime a localização atual do jogador.
     */
     private void pritnLocationInfo() {
         System.out.println(currentRoom.getLongDescription());
+    }
+    
+    /**
+     * Método repete a localização atual do jogador.
+    */
+    private void look() {
+        System.out.println(currentRoom.getDescription());
     }
 }
