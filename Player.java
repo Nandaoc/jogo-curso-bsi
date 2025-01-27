@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Esta classe armazena informações sobre o jogador, como seu nome, sua idade e 
@@ -11,6 +14,9 @@ public class Player
     private String currentRoom;
     private String playerName;
     private int playerAge;
+    private float maxWeight;
+    private float totalWeight;
+    private Map<String, RoomItems> playerItems;
 
     /**
      * Cria o jogador a partir de suas informações iniciais.
@@ -19,6 +25,8 @@ public class Player
         currentRoom = room;
         playerName = name;
         playerAge = age;
+        playerItems = new HashMap<>();
+        maxWeight = 10;
     }
 
     /**
@@ -42,4 +50,50 @@ public class Player
     public void setPlayerCurrentRoom(String room) {
         currentRoom = room;
     }
+    
+    /**
+     * Determina os itens que o personagem pegou na sala.
+     */
+    public void addItem(String itemName, RoomItems roomItem) {
+        playerItems.put(itemName, roomItem);
+        totalWeight += roomItem.getItemWeight();
+    }
+    
+    /**
+     * Retorna total de peso com o jogador.
+     */
+    public float getTotalWight() {
+        return totalWeight;
+    }
+
+    /**
+     * Retorna peso máximo que o jogador pode carregar.
+     */
+    public float getMaxWight() {
+        return maxWeight;
+    }
+    
+    /**
+     * Retorna string com itens do jogador.
+     */
+    public String items() {
+        String itemString = "Você tem o seguintes itens: ";
+        Set<String> keys = playerItems.keySet();
+        for(String item : keys) {
+            itemString += " " + item;
+        }
+        
+        itemString += ". Esses itens pesam: " + totalWeight;
+        
+        return itemString;
+    } 
+    
+    /**
+     * Remove um item armazenado com o jogador.
+     */
+    public void removeItem(String itemName) {
+        RoomItems roomItem = playerItems.get(itemName);
+        totalWeight -= roomItem.getItemWeight();
+        playerItems.remove(itemName);
+    } 
 }

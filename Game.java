@@ -21,6 +21,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> previousRooms;
+    private Player player;
          
     /**
      * Cria o jogo e inicializa seu mapa.
@@ -95,7 +96,11 @@ public class Game
         sportsCourt.setExit("trás", livingArea);
         
         // inicializa itens da sala
-        courtyard.addItem("cadeira", 2);
+        courtyard.addItem("cadeira 1", 2);
+        courtyard.addItem("cadeira 2", 2);
+        courtyard.addItem("mesa", 4);
+        library.addItem("livro 1", 0.5f);
+        cafe.addItem("café", 0.01f);
         
         currentRoom = outside;  // start game outside
     }
@@ -160,6 +165,12 @@ public class Game
             eat();
         } else if (commandWord.equals("back")) {
             back(command);
+        } else if (commandWord.equals("take")) {
+            take(command);
+        } else if (commandWord.equals("drop")) {
+            drop(command);
+        } else if (commandWord.equals("show")) {
+            show();
         }
 
         return wantToQuit;
@@ -294,8 +305,52 @@ public class Game
      * Permite criar um personagem com informações passadas pelo usuário.
     */
     private Player createPlayer(String room, String name, int age) {
-        Player player = new Player(room, name, age);
+        player = new Player(room, name, age);
         
         return player;
+    }
+    
+    /**
+     * Permite que o jogador pegue um item.
+    */
+    private void take(Command command) {
+        if(!command.hasSecondWord()) {
+            System.out.println("O que você quer pegar?");
+            return;
+        }
+        
+        String itemName = command.getSecondWord();
+        
+        if(player.getTotalWight() <= player.getMaxWight()) {
+            player.addItem(itemName, currentRoom.getRoomItem(itemName));
+        } else {
+            System.out.println("Você chegou ao limite de peso que consegue carregar.");
+        }
+        
+        show();
+    }
+    
+    /**
+     * Imprime os itens que o jogador possui.
+    */
+    private void show() {
+        System.out.println(player.items());
+        System.out.println("Você deseja descartar algo?");
+    }
+    
+    /**
+     * Permite que o jogador descarte um item.
+    */
+    private void drop(Command command) {
+        if(!command.hasSecondWord()) {
+            System.out.println("O que você quer descartar?");
+            return;
+        }
+        
+        String itemName = command.getSecondWord();
+        
+        player.removeItem(itemName);
+        
+        show();
     }
 }
