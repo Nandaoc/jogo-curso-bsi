@@ -1,55 +1,43 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Class Room - a room in an adventure game.
  *
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
- *
- * A "Room" represents one location in the scenery of the game.  It is 
- * connected to other rooms via exits.  The exits are labelled north, 
- * east, south, west.  For each direction, the room stores a reference
- * to the neighboring room, or null if there is no exit in that direction.
+ * A classe "Room" define um local no cenário do jogo com suas características, 
+ * como nome, saídas e itens que contém na sala.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Fernanda Carvalho e Marcella Del Rio
+ * @version 26/01/2025 :D
  */
 public class Room 
 {
-    public String description;
+    private String description;
     private Map<String, Room> exits;
+    private Map<String, RoomItems> roomItems;
 
     /**
-     * Create a room described "description". Initially, it has
-     * no exits. "description" is something like "a kitchen" or
-     * "an open court yard".
-     * @param description The room's description.
+     * Cria a descrição da sala e inicializa detalhes dela como saídas e itens 
+     * contidos nela.
      */
-    public Room(String description) 
-    {
+    public Room(String description) {
         this.description = description;
         exits = new HashMap<>();
+        roomItems = new HashMap<>();
     }
 
     /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
+     * Determina as saídas da sala.
      */
-    public void setExit(String direction, Room room) 
-    {
+    public void setExit(String direction, Room room) {
         exits.put(direction, room);
     }
 
     /**
-     * @return The description of the room.
+     * Retorna a descrição da sala.
      */
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
@@ -59,7 +47,7 @@ public class Room
     public Room getExit(String direction) {
         return exits.get(direction);
     }
-
+    
     /**
      * Retorna uma string com todas as saídas possíveis da sala.
      */
@@ -72,12 +60,40 @@ public class Room
         
         return exitString;
     }
-
+    
     /**
      * Retorna uma string com todas as saídas possíveis da sala e a descrição 
      * da sala atual.
      */
     public String getLongDescription() {
-        return "You are " + description + ". \n" + getExitString();
+        return "Você está " + description + ". \n" + getExitString();
     }
+    
+    /**
+     * Determina os itens da sala.
+     */
+    public void addItem(String itemName, float ItemWeight) {
+        RoomItems roomItem = new RoomItems(itemName, ItemWeight);
+        roomItems.put(itemName, roomItem);
+    }
+    
+    /**
+     * Retorna informações do item selecionado na sala.
+     */
+    public RoomItems getRoomItem(String ItemName) {
+        return roomItems.get(ItemName);
+    }
+    
+    /**
+     * Retorna string com itens da sala.
+     */
+    public String getItemString() {
+        String itemString = "Itens na sala: ";
+        Set<String> keys = roomItems.keySet();
+        for(String item : keys) {
+            itemString += " " + item;
+        }
+        
+        return itemString;
+    }   
 }

@@ -90,6 +90,9 @@ public class Game
         parking.setExit("trás", corridor1);
         sportsCourt.setExit("trás", livingArea);
         
+        // inicializa itens da sala
+        courtyard.addItem("cadeira", 2);
+        
         currentRoom = outside;  // start game outside
     }
 
@@ -244,6 +247,7 @@ public class Game
     */
     private void pritnLocationInfo() {
         System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentRoom.getItemString());
     }
     
     /**
