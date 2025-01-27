@@ -20,7 +20,7 @@ public class Game
     private Room currentRoom;
         
     /**
-     * Create the game and initialise its internal map.
+     * Cria o jogo e inicializa seu mapa.
      */
     public Game() 
     {
@@ -29,29 +29,67 @@ public class Game
     }
 
     /**
-     * Create all the rooms and link their exits together.
+     * Cria e conceta todas as salas.
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, winner, courtyard, cafe, library, livingArea, corridor1, corridor2, office, acr, lab1, lab2, lab3, corridor3, classroom, parking, sportsCourt;
       
-        // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        // cria as salas
+        outside = new Room("lado de fora do campus");
+        courtyard = new Room("no pátio da faculdade");
+        cafe = new Room("na lanchonete");
+        lab1 = new Room("no lab 1");
+        library = new Room("na biblioteca");
+        livingArea = new Room("na área de convivência");
+        corridor1 = new Room("no corredor 1");
+        corridor2 = new Room("no corredor 2");
+        office = new Room("no gabinete");
+        acr = new Room("no CRA");
+        lab2 = new Room("no lab2");
+        lab3 = new Room("no lab3");
+        corridor3 = new Room("no corredor 3");
+        classroom = new Room("na sala de aula");
+        parking = new Room("no estacionamento");
+        sportsCourt = new Room("na quadra de esportes");
+        winner = new Room("VENCEU!");
         
-        // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("west", pub);
-        outside.setExit("south", lab);
-        theater.setExit("west", outside);
-        pub.setExit("east", outside);
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-        office.setExit("west",lab);
-
+        // inicializa as saídas
+        outside.setExit("frente", courtyard);
+        courtyard.setExit("frente", corridor1);
+        courtyard.setExit("esquerda", cafe);
+        courtyard.setExit("trás", outside);
+        cafe.setExit("frente", lab1);
+        cafe.setExit("trás", courtyard);
+        lab1.setExit("trás", cafe);
+        lab1.setExit("frente", library);
+        lab1.setExit("esquerda", outside);
+        lab1.setExit("direita", livingArea);
+        library.setExit("trás", lab1);
+        library.setExit("direita", livingArea);
+        livingArea.setExit("esquerda", sportsCourt);
+        livingArea.setExit("frente", classroom);
+        livingArea.setExit("direita", corridor1);
+        livingArea.setExit("trás", library);
+        corridor1.setExit("frente", corridor2);
+        corridor1.setExit("trás", courtyard);
+        corridor1.setExit("direita", parking);
+        corridor1.setExit("esquerda", livingArea);
+        corridor2.setExit("trás", corridor1);
+        corridor2.setExit("frente", office);
+        corridor2.setExit("esquerda", corridor3);
+        corridor3.setExit("trás", corridor2);
+        corridor3.setExit("direita1", acr);
+        corridor3.setExit("direita2", lab1);
+        corridor3.setExit("direita3", lab3);
+        office.setExit("trás", corridor2);
+        acr.setExit("trás", corridor3);
+        lab2.setExit("trás", corridor3);
+        lab3.setExit("trás", corridor3);
+        classroom.setExit("trás", livingArea);
+        parking.setExit("trás", corridor1);
+        sportsCourt.setExit("trás", livingArea);
+        
         currentRoom = outside;  // start game outside
     }
 
