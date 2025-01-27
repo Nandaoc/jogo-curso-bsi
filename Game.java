@@ -103,10 +103,10 @@ public class Game
     /**
      *  Main play routine.  Loops until end of play.
      */
-    public void play() 
+    public void play(String name, int age) 
     {            
         printWelcome();
-
+        createPlayer(currentRoom.getDescription(), name,age);
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
                 
@@ -127,6 +127,7 @@ public class Game
         System.out.println("Boas-vindas ao Curso de BSI!");
         System.out.println("O Curso de BSI é uma aventura longa e cansativa, mas é legal.");
         System.out.println("Digite 'help' se você precisar de ajuda.");
+        System.out.println("Crie um personagem para iniciar sua aventura.");
         System.out.println();
         pritnLocationInfo();
         System.out.println();
@@ -287,5 +288,14 @@ public class Game
             currentRoom = previousRooms.pop();
             pritnLocationInfo();
         }
+    }
+
+    /**
+     * Permite criar um personagem com informações passadas pelo usuário.
+    */
+    private Player createPlayer(String room, String name, int age) {
+        Player player = new Player(room, name, age);
+        
+        return player;
     }
 }
