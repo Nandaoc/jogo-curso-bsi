@@ -188,17 +188,26 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = null;
-        if(direction.equals("north")) {
-            nextRoom = currentRoom.getExit("north");
+        if(direction.equals("frente")) {
+            nextRoom = currentRoom.getExit("frente");
         }
-        if(direction.equals("east")) {
-            nextRoom = currentRoom.getExit("east");
+        if(direction.equals("trás")) {
+            nextRoom = currentRoom.getExit("trás");
         }
-        if(direction.equals("south")) {
-            nextRoom = currentRoom.getExit("south");
+        if(direction.equals("direita")) {
+            nextRoom = currentRoom.getExit("direita");
         }
-        if(direction.equals("west")) {
-            nextRoom = currentRoom.getExit("west");
+        if(direction.equals("esquerda")) {
+            nextRoom = currentRoom.getExit("esquerda");
+        }
+        if(direction.equals("direita1")) {
+            nextRoom = currentRoom.getExit("direita1");
+        }
+        if(direction.equals("direita2")) {
+            nextRoom = currentRoom.getExit("direita2");
+        }
+        if(direction.equals("direita3")) {
+            nextRoom = currentRoom.getExit("direita3");
         }
 
         if (nextRoom == null) {
