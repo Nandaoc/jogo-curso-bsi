@@ -72,4 +72,12 @@ public class Room
         
         return exitString;
     }
+
+    /**
+     * Retorna uma string com todas as saídas possíveis da sala e a descrição 
+     * da sala atual.
+     */
+    public String getLongDescription() {
+        return "You are " + description + ". \n" + getExitString();
+    }
 }

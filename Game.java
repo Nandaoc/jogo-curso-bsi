@@ -191,7 +191,6 @@ public class Game
        * Método que imprime a localização atual do jogador.
     */
     private void pritnLocationInfo() {
-        System.out.println("You are " + currentRoom.getDescription());
-        System.out.println(currentRoom.getExitString());
+        System.out.println(currentRoom.getLongDescription());
     }
 }
