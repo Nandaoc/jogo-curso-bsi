@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  *  Esta é a classe principal do jogo "Curso de BSI". 
  *  "Curso de BSI" é um jogo simples de aventura baseado em texto. Os jogadores 
@@ -18,7 +20,8 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private Stack<Room> previousRooms;
+         
     /**
      * Cria o jogo e inicializa seu mapa.
      */
@@ -26,6 +29,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        previousRooms = new Stack<>();
     }
 
     /**
@@ -145,18 +149,16 @@ public class Game
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help")) {
             printHelp();
-        }
-        else if (commandWord.equals("go")) {
+        } else if (commandWord.equals("go")) {
             goRoom(command);
-        }
-        else if (commandWord.equals("quit")) {
+        } else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
-        }
-        else if (commandWord.equals("look")) {
+        } else if (commandWord.equals("look")) {
             look();
-        }
-        else if (commandWord.equals("eat")) {
+        } else if (commandWord.equals("eat")) {
             eat();
+        } else if (commandWord.equals("back")) {
+            back(command);
         }
 
         return wantToQuit;
@@ -189,7 +191,9 @@ public class Game
             System.out.println("Vai aonde?");
             return;
         }
-
+        
+        previousRooms.push(currentRoom);
+        
         String direction = command.getSecondWord();
 
         // Try to leave current room.
@@ -265,6 +269,23 @@ public class Game
             System.out.println("Você deveria tomar um café e comer um pão de queijo!");
         } else {
             System.out.println("Você já comeu e não está com fome mais.");
+        }
+    }
+    
+    /**
+     * Permite que o jogador volte ao local de onde veio.
+    */
+    private void back(Command command) {
+        if(command.hasSecondWord()) {
+            System.out.println("Você pode apenas voltar de onde veio.");
+            return;
+        }
+        
+        if(previousRooms.isEmpty()) {
+            System.out.println("Você já voltou ao início, daqui pra trás é só pra frente.");
+        } else {
+            currentRoom = previousRooms.pop();
+            pritnLocationInfo();
         }
     }
 }
