@@ -1,18 +1,17 @@
 /**
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
- *  to make it more interesting!
+ *  Esta é a classe principal do jogo "Curso de BSI". 
+ *  "Curso de BSI" é um jogo simples de aventura baseado em texto. Os jogadores 
+ *  caminharão pelo cenários da faculdae com o objetivo de sair dela por meio
+ *  da resolução de enigmas sobre os conteúdos do curso.
  * 
- *  To play this game, create an instance of this class and call the "play"
- *  method.
+ *  Para jogar, crie uma instânncia desta classe e execue o método "play",
  * 
- *  This main class creates and initialises all the others: it creates all
- *  rooms, creates the parser and starts the game.  It also evaluates and
- *  executes the commands that the parser returns.
+ *  Esta classe cria e inicializa todas as demais: cria todas as salas, os
+ *  analisadores e inicializa o jogo. Ela também avalia e executa os 
+ *  comandos retornados pelo analisador.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Fernanda Carvalho e Marcella Del Rio
+ * @version 26/01/2025 :D
  */
 
 public class Game 
