@@ -152,6 +152,9 @@ public class Game
         else if (commandWord.equals("look")) {
             look();
         }
+        else if (commandWord.equals("eat")) {
+            eat();
+        }
 
         return wantToQuit;
     }
@@ -237,16 +240,27 @@ public class Game
     }
     
     /**
-     * Método que imprime a localização atual do jogador.
+     * Imprime a localização atual do jogador.
     */
     private void pritnLocationInfo() {
         System.out.println(currentRoom.getLongDescription());
     }
     
     /**
-     * Método repete a localização atual do jogador.
+     * Repete a localização atual do jogador.
     */
     private void look() {
         System.out.println(currentRoom.getDescription());
+    }
+    
+    /**
+     * Permite que o jogador coma ou não.
+    */
+    private void eat() {
+        if(currentRoom.getDescription().equals("na lanchonete")) {
+            System.out.println("Você deveria tomar um café e comer um pão de queijo!");
+        } else {
+            System.out.println("Você já comeu e não está com fome mais.");
+        }
     }
 }
