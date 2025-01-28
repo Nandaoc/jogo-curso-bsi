@@ -102,6 +102,14 @@ public class Game
         library.addItem("livro 1", 0.5f);
         cafe.addItem("café", 0.01f);
         livingArea.addItem("cogumelo", 0.01f);
+        courtyard.addItem("chave 1", 0);
+        library.addItem("chave 2", 0);
+        corridor1.addItem("chave 3", 0);
+        livingArea.addItem("chave 4", 0);
+        classroom.addItem("chave 5", 0);
+        acr.addItem("chave 6", 0);
+        corridor3.addItem("chave 7", 0);
+        lab3.addItem("chave 8", 0);
         
         currentRoom = outside;  // start game outside
     }
