@@ -95,5 +95,12 @@ public class Room
         }
         
         return itemString;
-    }   
+    }
+    
+    /**
+     * Remove um item da sala.
+     */
+    public void removeItem(String itemName) {
+        roomItems.remove(itemName);
+    } 
 }

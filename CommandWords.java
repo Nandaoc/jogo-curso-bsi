@@ -40,7 +40,7 @@ public class CommandWords
     }
     
     /**
-     * Imprime todos os comandos existentes no jogo.  
+     * Imprime todos os comandos existentes no jogo.   
     */
     public String showAll() {
         String commands = "";

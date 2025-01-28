@@ -1,4 +1,3 @@
-
 /**
  * Esta classe contém todos os itens que estão em uma sala do jogo.
  * 

@@ -101,6 +101,7 @@ public class Game
         courtyard.addItem("mesa", 4);
         library.addItem("livro 1", 0.5f);
         cafe.addItem("café", 0.01f);
+        livingArea.addItem("cogumelo", 0.01f);
         
         currentRoom = outside;  // start game outside
     }
@@ -161,7 +162,7 @@ public class Game
             wantToQuit = quit(command);
         } else if (commandWord.equals("look")) {
             look();
-        } else if (commandWord.equals("eat")) {
+        } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
             eat();
         } else if (commandWord.equals("back")) {
             back(command);
@@ -171,6 +172,8 @@ public class Game
             drop(command);
         } else if (commandWord.equals("show")) {
             show();
+        } else if (commandWord.equals("eat") && command.hasSecondWord()) {
+            eatMushroom(command);
         }
 
         return wantToQuit;
@@ -352,5 +355,21 @@ public class Game
         player.removeItem(itemName);
         
         show();
+    }
+    
+    private void eatMushroom(Command command) {
+        String food = command.getSecondWord();
+        System.out.println(food);
+        if(food.equals("cogumelo")) {
+            player.setMaxWeight(20);
+            
+            System.out.println("Parabéns! Vcoê ganhou um aumento no peso que pode carregar.");
+            System.out.println();
+            System.out.println("Você pode carregar um total de 20.");
+            
+            currentRoom.removeItem("cogumelo");
+        } else {
+            System.out.println("Não existe este alimento aqui.");
+        }
     }
 }

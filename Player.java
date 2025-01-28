@@ -52,6 +52,13 @@ public class Player
     }
     
     /**
+     * Atualiza peso máximo de carga do jogador.
+     */
+    public void setMaxWeight(float weight) {
+        maxWeight = weight;
+    }
+    
+    /**
      * Determina os itens que o personagem pegou na sala.
      */
     public void addItem(String itemName, RoomItems roomItem) {
