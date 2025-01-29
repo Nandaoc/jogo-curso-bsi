@@ -103,8 +103,8 @@ public class Game
         cafe.addItem("café", 0.01f);
         livingArea.addItem("cogumelo", 0.01f);
         courtyard.addItem("chave1", 0);
-        library.addItem("chave2", 0);
-        corridor1.addItem("chave3", 0);
+        library.addItem("chave3", 0);
+        corridor1.addItem("chave2", 0);
         livingArea.addItem("chave4", 0);
         classroom.addItem("chave5", 0);
         acr.addItem("chave6", 0);
@@ -178,10 +178,14 @@ public class Game
             take(command);
         } else if (commandWord.equals("drop")) {
             drop(command);
-        } else if (commandWord.equals("show")) {
+        } else if (commandWord.equals("show") && !command.hasSecondWord()) {
             show();
         } else if (commandWord.equals("eat") && command.hasSecondWord()) {
             eatMushroom(command);
+        } else if (commandWord.equals("show") && command.hasSecondWord()) {
+            showPuzzle(command);
+        } else if (commandWord.equals("solve")) {
+            solve(command);
         }
 
         return wantToQuit;
@@ -275,6 +279,12 @@ public class Game
     private void pritnLocationInfo() {
         System.out.println(currentRoom.getLongDescription());
         System.out.println(currentRoom.getItemString());
+        
+        if(currentRoom.getItemString().contains("chave")) {
+            System.out.println("Nesta sala há uma chave.");
+            System.out.println("Execute o comando 'show enigma' para acessar o enigma da chave.");
+            System.out.println("Execute o comando 'solve' + sua resposta para resolver o enigma.");
+        }
     }
     
     /**
@@ -380,6 +390,44 @@ public class Game
             currentRoom.removeItem("cogumelo");
         } else {
             System.out.println("Não existe este alimento aqui.");
+        }
+    }
+    
+    private void showPuzzle(Command command) {
+        if(currentRoom.getDescription().equals("no pátio da faculdade")) {
+            System.out.println("Um paradigma onde objetos ganham vida, com atributos e métodos a guiar. \n Encapsulamento, herança e polimorfismo, qual é o nome desse mecanismo?");
+        } else if(currentRoom.getDescription().equals("no corredor 1")) {
+            System.out.println("Eu sou a característica que descreve o quanto as \n responsabilidades de uma classe ou módulo estão relacionadas entre si. \n Quando mais focadas e coesas são minhas responsabilidades,\n mais fácil é entender e manter meu código. \n Quem sou eu?");
+        }
+    }
+    
+    private void solve(Command command) {
+        if(currentRoom.getDescription().equals("no pátio da faculdade")) {
+            String answer = command.getSecondWord();  
+            if(answer.equals("POO")) {
+                System.out.println("Parabéns! Você ganhou uma nova chave!");
+                System.out.println("Resolva o enigma 2 no corredor para conseguir a próxima.");
+                player.addItem("chave1", currentRoom.getRoomItem("chave1"));
+                currentRoom.removeItem("chave1");
+            } else {
+                currentRoom = previousRooms.firstElement();
+                System.out.println("Você errou a resposta! Volte mais tarde para tentar novamente ;)");
+                System.out.println();
+                pritnLocationInfo();
+            }
+        } else if(currentRoom.getDescription().equals("no corredor 1")) {
+            String answer = command.getSecondWord();  
+            if(answer.equals("coesão")) {
+                System.out.println("Parabéns! Você ganhou uma nova chave!");
+                System.out.println("Resolva o enigma 3 na biblioteca para conseguir a próxima.");
+                player.addItem("chave2", currentRoom.getRoomItem("chave2"));
+                currentRoom.removeItem("chave2");
+            } else {
+                currentRoom = previousRooms.firstElement();
+                System.out.println("Você errou a resposta! Volte mais tarde para tentar novamente ;)");
+                System.out.println();
+                pritnLocationInfo();
+            }
         }
     }
 }
