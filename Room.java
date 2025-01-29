@@ -102,5 +102,5 @@ public class Room
      */
     public void removeItem(String itemName) {
         roomItems.remove(itemName);
-    } 
+    }
 }

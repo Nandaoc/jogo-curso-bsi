@@ -96,20 +96,20 @@ public class Game
         sportsCourt.setExit("trás", livingArea);
         
         // inicializa itens da sala
-        courtyard.addItem("cadeira 1", 2);
-        courtyard.addItem("cadeira 2", 2);
+        courtyard.addItem("cadeira1", 2);
+        courtyard.addItem("cadeira2", 2);
         courtyard.addItem("mesa", 4);
-        library.addItem("livro 1", 0.5f);
+        library.addItem("livro1", 0.5f);
         cafe.addItem("café", 0.01f);
         livingArea.addItem("cogumelo", 0.01f);
-        courtyard.addItem("chave 1", 0);
-        library.addItem("chave 2", 0);
-        corridor1.addItem("chave 3", 0);
-        livingArea.addItem("chave 4", 0);
-        classroom.addItem("chave 5", 0);
-        acr.addItem("chave 6", 0);
-        corridor3.addItem("chave 7", 0);
-        lab3.addItem("chave 8", 0);
+        courtyard.addItem("chave1", 0);
+        library.addItem("chave2", 0);
+        corridor1.addItem("chave3", 0);
+        livingArea.addItem("chave4", 0);
+        classroom.addItem("chave5", 0);
+        acr.addItem("chave6", 0);
+        corridor3.addItem("chave7", 0);
+        lab3.addItem("chave8", 0);
         
         currentRoom = outside;  // start game outside
     }
@@ -334,6 +334,7 @@ public class Game
         
         if(player.getTotalWight() <= player.getMaxWight()) {
             player.addItem(itemName, currentRoom.getRoomItem(itemName));
+            currentRoom.removeItem(itemName);
         } else {
             System.out.println("Você chegou ao limite de peso que consegue carregar.");
         }
@@ -359,7 +360,8 @@ public class Game
         }
         
         String itemName = command.getSecondWord();
-        
+        float itemWeight = player.getPlayerItem(itemName).getItemWeight();
+        currentRoom.addItem(itemName, itemWeight);
         player.removeItem(itemName);
         
         show();
